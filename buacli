@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# PYTHON_ARGCOMPLETE_OK
+
+import sys, subprocess
+import argcomplete, argparse
+
+def gen(config):
+	print("Generating build files...")
+
+	subprocess.check_call(["cmake", 
+		"-B", "build", 
+		"-DCMAKE_BUILD_TYPE=" + config])
+
+def build():
+	print("Building binaries...")
+
+	subprocess.check_call(["make", 
+		"-C", "build"])
+
+def main():
+	parser = argparse.ArgumentParser(description='Bua CLI')
+	subparsers = parser.add_subparsers(dest='command', metavar='COMMAND', required=True)
+	gencommand = subparsers.add_parser('gen', help='generate build files')
+	gencommand.add_argument("config", metavar='CONFIG',
+		choices=["Debug", "Release"],
+		help="configuration")
+	buildcommand = subparsers.add_parser('build', help='build binaries')
+	testcommand = subparsers.add_parser('test', help='run tests')
+	runcommand = subparsers.add_parser('run', help='build and run examples')
+
+	argcomplete.autocomplete(parser)
+	args = parser.parse_args()
+
+	if args.command == "gen":
+		gen(args.config)
+	elif args.command == "build":
+		build()
+	elif args.command == "test":
+		print("Testing projects")	
+	elif args.command == "run":
+		print("Running examples")
+
+if __name__ == '__main__':
+	sys.exit(main())
