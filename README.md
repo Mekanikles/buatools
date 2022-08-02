@@ -1,4 +1,4 @@
-### The Best UI API Toolset
+# The Best UI API Toolset
 
 ## Components
 - `buacore`: internal core library for all toolset binaries.
@@ -11,12 +11,12 @@
 
 ## How to set up a developer workspace
 
-# Prerequisites
+### Prerequisites
 - Conan
 - Cmake
 - Python 3 (optional)
 
-# Instructions
+### Instructions
 - Run `buasetup`
 - Run `buacli gen Debug` to generate build files for the Debug configuration
 - Run `buacli build` to build all binaries
