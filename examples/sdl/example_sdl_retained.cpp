@@ -41,7 +41,7 @@ int main(int argc, const char** argv)
 			// Animate color
 			{
 				const float progress = (currentFrameTick % 500) / 500.0f;
-				Color color{progress, progress, progress, 1};
+				Color color{1, 1, 1, progress};
 
 				fills[0]->update(Rect{100, 100, 50, 50}, color);
 			}

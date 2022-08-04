@@ -14,7 +14,7 @@ void drawUI(not_null<bua::RenderState*> renderState, uint currentFrameTick)
 
 	// Animate color
 	const float progress = (currentFrameTick % 500) / 500.0f;
-	Color color{progress, progress, progress, 1};
+	Color color{1, 1, 1, progress};
 
 	// TODO: Elements should not accept layout rects like this
 	im::fill(Rect{100, 100, 50, 50}, Color{1, 0, 1, 1});

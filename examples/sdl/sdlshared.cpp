@@ -29,6 +29,7 @@ int runSdlExample(const char* name, eastl::function<void(SDL_Renderer*, uint)> u
 	}
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
 	int done = false;
 	SDL_Event event;
@@ -36,8 +37,13 @@ int runSdlExample(const char* name, eastl::function<void(SDL_Renderer*, uint)> u
 	uint lastFrameTick = 0;
 	while (!done) {
 		uint currentFrameTick = SDL_GetTicks();
-		if (currentFrameTick - lastFrameTick < (1000 / 60))
+		constexpr uint frameLength = (1000 / 60);
+		if (currentFrameTick - lastFrameTick < frameLength)
+		{
+			// Ususally really bad resolution on this delay, but whatever, let's not cook the cpu for the example projects
+			SDL_Delay(frameLength - (currentFrameTick - lastFrameTick));
 			continue;
+		}
 
 		lastFrameTick = currentFrameTick;
 
